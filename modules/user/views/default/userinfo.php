@@ -9,16 +9,22 @@
 <div class="well container col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
 <?php //Pjax::begin() ?>
     <div class="user-info">
-        <div class="image-block col-md-6 ">
-            <div class="col-md-offset-1 col-xs-offset-3">
-                <?= Html::showUserAvatar(150, $userInfo->user_avatar) ?>
-            </div>
+        <div class="image-block col-md-12 row">
             <?php if($name_param === false): ?>
-                <?= $this->render('imageUploadForm', ['modelImageUpload'=>$modelImageUpload]);  ?>
+                <div class="col-md-offset-2 col-md-3">
+                    <?= Html::showUserAvatar(150, $userInfo->user_avatar) ?>
+                </div>
+                <div class="image-upload col-md-6" style="border:2px solid red">
+                    <?= $this->render('imageUploadForm', ['modelImageUpload'=>$modelImageUpload]);  ?>
+                </div>
+            <?php else: ?>
+                <div class="col-md-offset-4 col-md-3">
+                    <?= Html::showUserAvatar(150, $userInfo->user_avatar) ?>
+                </div>
             <?php endif; ?>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-offset-3 col-md-6 row">
             <table class="table table-user-information table-bordered">
                 <tbody>
                     <tr>

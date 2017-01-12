@@ -4,33 +4,32 @@
     use yii\helpers\Html;
 ?>
 
-<div class="image-upload">
-    <div class="panel-body">
+<div class="panel-body">
                     
-        <?php $form = ActiveForm::begin(
-            ['options' => 
-                [
-                    'enctype' => 'multipart/form-data',
-                    'data-pjax'=>true
-                ]
+    <?php $form = ActiveForm::begin(
+        ['options' => 
+            [
+                'enctype' => 'multipart/form-data',
+                'data-pjax'=>true
             ]
-        )?>
+        ]
+    )?>
                     
-            <?= $form
-                ->field($modelImageUpload, 'imageFile')
-                ->fileInput(['id'=>'files', 'class' => 'filestyle'])
-                ->label(false)
-            ?>
+    <?= $form
+        ->field($modelImageUpload, 'imageFile')
+        ->fileInput(['id'=>'files', 'class' => 'filestyle'])
+        ->label(false)
+    ?>
                     
-        <?= Html::submitButton('Изменить', ['class' => 'btn btn-success col-md-12', 'id' => 'uploadImageBtn']) ?>
+    <?= Html::submitButton('Изменить', ['class' => 'btn btn-success col-md-12', 'id' => 'uploadImageBtn']) ?>
 
-        <?php ActiveForm::end() ?>
+    <?php ActiveForm::end() ?>
 
-    </div>
 </div>
 
+
 <script>
-// код, предназначенный для вывода превью картинки
+// код, предназначенный для вывода превью картинки после выбора файла
     document.getElementById("files").onchange = function () {
     var reader = new FileReader();
 
