@@ -59,7 +59,7 @@ class DefaultController extends Controller
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if($model->uploadImage())
             {
-                return $this->render('userinfo', $data);
+                $this->refresh();
             }
         }
         

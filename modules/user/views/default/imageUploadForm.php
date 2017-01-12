@@ -30,6 +30,7 @@
 </div>
 
 <script>
+// код, предназначенный для вывода превью картинки
     document.getElementById("files").onchange = function () {
     var reader = new FileReader();
 
