@@ -14,7 +14,7 @@
                 <div class="col-md-offset-2 col-md-3">
                     <?= Html::showUserAvatar(150, $userInfo->user_avatar) ?>
                 </div>
-                <div class="image-upload col-md-6" style="border:2px solid red">
+                <div class="image-upload col-md-6">
                     <?= $this->render('imageUploadForm', ['modelImageUpload'=>$modelImageUpload]);  ?>
                 </div>
             <?php else: ?>
