@@ -3,6 +3,9 @@
 
 ftpsync.settings
 
+config/db.php
+config/web.php
+
 # netbeans project files
 nbproject
 
