@@ -1,0 +1,35 @@
+
+
+
+.social > a{
+	margin:25px 5px;
+	background-image: none;
+	background-size:100%;
+	width:52px;
+	height:52px;
+	border-radius: 50%;
+
+	transition:0.2s;
+	display:inline-block;
+}
+
+.social > a:hover{
+	transform:scale(1.1);
+}
+
+.social .vk{
+	background-image: url('../images/vk_icon.png');
+}
+
+.social .git{
+	background-image: url('../images/github_icon.png');
+}
+
+.contact p{
+	display:inline;
+}
+
+a{
+	text-decoration:none;
+	color:lightblue;
+}

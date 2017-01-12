@@ -1,0 +1,23 @@
+.card{
+    background-color:#4e5d6c;
+    color:black;
+    padding:10px;
+    box-shadow: 0 0 10px black;
+    margin:5px;
+    border-radius: 2px;
+}
+
+.sub-card{
+    background-color:white;
+    color:black;
+    padding:10px;
+    box-shadow: 0 0 2px black;
+    margin:5px;
+    border-radius: 2px;
+}
+
+.sub-table
+
+.card-text{
+    color:black;
+}

@@ -1,0 +1,28 @@
+    .trackLineBody {
+        display: inline-block;
+        height: 60px;
+        padding: 0px 0;
+        text-align: left;
+        width: 30px;
+        background-position: -125px center;
+    }
+    .trackLineIcon {
+        background-color: #44BE44;
+        border:3px solid #FFFFFF;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -80px;
+    }
+    .trackLine{
+        background-color: #FFFFFF;
+        border-left:2px solid #D4D9DD;
+        border-right:2px solid #D4D9DD;
+        width: 7px;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px;
+    }
