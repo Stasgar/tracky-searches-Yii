@@ -2,8 +2,8 @@
 
 namespace app\modules\auth\models;
 
-use yii\base\Model;
 use app\models\User;
+use yii\base\Model;
 
 class Signup extends Model
 {

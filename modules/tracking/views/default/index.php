@@ -1,11 +1,10 @@
 <?php
-    //$this->registerCssFile('css/card.css');
+
+    use yii\widgets\ActiveForm;
     use yii\widgets\Pjax;
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use yii\widgets\ActiveForm;
-
-    //use yii\widgets\ActiveForm;
+    
     $this->registerJsFile(Yii::$app->request->baseUrl.'/js/tracking.js');
     $this->title = "Tracky-Searches";
 ?>

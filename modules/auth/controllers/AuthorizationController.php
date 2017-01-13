@@ -3,10 +3,10 @@
 namespace app\modules\auth\controllers;
 use yii\web\Controller;
 
-use app\models\User;
 use app\modules\auth\models\Signup;
 use app\modules\auth\models\Login;
 use yii\helpers\Url;
+use app\models\User;
 use Yii;
 
 /**

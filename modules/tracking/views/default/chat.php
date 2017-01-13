@@ -1,7 +1,7 @@
 <?php
+    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\Pjax;
-    use yii\widgets\ActiveForm;
     use yii\helpers\Url;
 
     $this->registerJsFile(Yii::$app->request->baseUrl.'/js/chat.js');

@@ -3,7 +3,6 @@
 namespace app\modules\tracking\models;
 
 use app\models\User;
-
 use Yii;
 
 /**

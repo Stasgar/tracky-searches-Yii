@@ -3,10 +3,11 @@
 namespace app\modules\user\controllers;
 
 use app\modules\user\models\UserSettings;
-use app\models\User;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use yii\web\Controller;
-use yii\filters\AccessControl;
+use app\models\User;
+
 use Yii;
 
 /**
