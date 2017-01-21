@@ -86,7 +86,8 @@ class SearchTrack
         return $result;
     }
 
-    public function SG(){
+    public function SG()
+    {
         $url = 'http://www.singpost.com/track-items';
         $params = array(
             'track_number' => $this->track,
