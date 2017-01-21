@@ -48,8 +48,4 @@
         </span>
     </div>
     </form>
-<?php else: ?>
-    <div class="alert alert-danger">
-        Вам запрещен доступ в чат
-    </div>
 <?php endif; ?>
