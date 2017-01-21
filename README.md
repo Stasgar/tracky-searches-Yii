@@ -1,4 +1,5 @@
 # tracky-searches-Yii
+[![Build Status](https://travis-ci.org/Stasgar/tracky-searches-Yii.svg?branch=master)](https://travis-ci.org/Stasgar/tracky-searches-Yii)
 
 Репозиторий веб-сайта tracky-searches.ru
 
