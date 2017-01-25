@@ -1,6 +1,5 @@
-# tracky-searches-Yii
-[![Build Status](https://travis-ci.org/Stasgar/tracky-searches-Yii.svg?branch=master)](https://travis-ci.org/Stasgar/tracky-searches-Yii)
-
+# 💡tracky-searches-Yii
+***
 Репозиторий веб-сайта tracky-searches.ru
 
 Данный проект представляет из себя сервис по отслеживанию посылок.
@@ -15,3 +14,5 @@
 * Произвести настройку БД в файле config/db.php
 * В файле config/web.php произвести настройку SwiftMailer
   * В контроллере авторизации (modules/auth/controllers/AuthorizationController.php) установить свое значение в поле "->setFrom('your-email')"
+  
+>Данное приложение было разработан в качестве курсового проекта для **СПБКТ**.
