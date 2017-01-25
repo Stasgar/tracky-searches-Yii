@@ -42,6 +42,13 @@ class m170125_104224_create_db_tables extends Migration
             'datetime' => $this->timestamp(),
         ], $tableOptions);
 
+        $this->createTable('{{%reset_password_token}}', [
+            'reset_password_token_id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),
+            'token' => $this->string(256)->notNull(),
+            'expires' => $this->timestamp()->notNull()
+        ], $tableOptions);
+
 
     }
 
