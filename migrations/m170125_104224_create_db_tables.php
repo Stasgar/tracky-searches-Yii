@@ -20,9 +20,9 @@ class m170125_104224_create_db_tables extends Migration
             'user_email' => $this->string()->notNull(),
             'user_role' => $this->integer()->defaultValue(0),
             'user_ban_status' => $this->integer()->defaultValue(0),
-            'user_avatar' => $this->string(),
+            'user_avatar' => $this->string()->defaultValue('default.jpg'),
             'reg_time' => $this->timestamp(),
-            'user_authkey' => $this->string(32)->notNull(),
+            'user_authkey' => $this->string(256)->notNull(),
             'user_activated' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
 
