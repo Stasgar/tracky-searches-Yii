@@ -17,6 +17,8 @@
                             ->label('E-mail адрес'); 
         ?>
         <?= Html::submitButton('Отправить',['class'=>'btn btn-success']); ?>
+
+        <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className()) ?>
     <?php ActiveForm::end() ?>
 </div>
 </div>
