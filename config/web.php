@@ -57,14 +57,7 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'transport' =>[
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.mail.ru',
-                'username' => 'your-email',
-                'password' => 'your-email-pass',
-                'port' => '465',
-                'encryption' => 'ssl',
-            ]
+            'transport' =>require __DIR__ . '/email_data.php',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -91,7 +84,9 @@ $config = [
                 'about' => 'site/about',
                 'user' => 'user/default/user-info',
                 'user/<name_param:\w+>' => 'user/default/user-info',
-                'authorization' => 'auth/authorization/authorize'
+                'authorization' => 'auth/authorization/authorize',
+                'change-password' => 'auth/password-management/change-password',
+                'reset-password' => 'auth/password-management/reset-password-request'
             ],
         ],
         
