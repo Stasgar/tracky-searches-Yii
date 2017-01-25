@@ -8,10 +8,12 @@ use yii\base\Model;
 use Yii;
 
 use app\modules\auth\models\ResetPasswordToken;
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
 
 class PasswordResetRequestForm extends Model
 {
     public $email;
+    public $reCaptcha;
 
     public function rules()
     {
@@ -19,6 +21,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'required', 'message' => 'Введите адрес, на который зарегистрирован аккаунт'],
             ['email', 'email', 'message'=>'Адрес введен не корректно'],
             ['email', 'validateEmail'],
+            [['reCaptcha'], ReCaptchaValidator::className(), 'uncheckedMessage' => 'Вы не прошли проверку ReCaptcha']
         ];
     }
 
