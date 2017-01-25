@@ -1,7 +1,8 @@
 <?php
-    use yii\helpers\Html;
     use yii\widgets\ActiveForm;
+    use yii\helpers\Html;
     use yii\widgets\Pjax;
+    use yii\helpers\Url;
     $this->title = "Регистрация/Вход";
 ?>
 
@@ -39,9 +40,9 @@
                         ->passwordInput(['placeholder'=>'Пароль'])
                         ->label('Пароль');
             ?>
-
+            
             <?= Html::submitButton('Вход',['class'=>'btn btn-success']); ?>
-        
+            <a class="pull-right" href="<?= Url::toRoute(['/reset-password']) ?>">Забыли пароль?</a>
         <?php ActiveForm::end(); ?>
         <?php Pjax::end(); ?>
         </div>
