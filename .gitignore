@@ -1,6 +1,6 @@
 # phpstorm project files
 .idea
-
+vendor
 ftpsync.settings
 
 config/db.php
@@ -18,7 +18,6 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor
 
 # composer itself is not needed
 composer.phar
