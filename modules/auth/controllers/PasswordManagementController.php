@@ -24,18 +24,17 @@ class PasswordManagementController extends Controller
                 if($resetPasswordModel->expires > Date('Y-m-d h:m:s'))
                 {
                     if(Yii::$app->request->post('PasswordChangeForm'))
-                    {//echo'hui1';die;
+                    {
                         $modelPasswordChange->attributes = Yii::$app->request->post('PasswordChangeForm');
 
                         if($modelPasswordChange->validate())
                         {
-                            //echo'hui2';die;
                             $modelPasswordChange->changeUserPassword($resetPasswordModel);
                             return $this->render('ChangeSuccess');
                         }
                         
                     }
-                    //echo'hui01';die;
+                    
                     return $this->render('PasswordChange', ['model' => $modelPasswordChange]);
                 }
                 else
