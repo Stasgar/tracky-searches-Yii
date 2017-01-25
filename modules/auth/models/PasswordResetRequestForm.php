@@ -50,7 +50,7 @@ class PasswordResetRequestForm extends Model
                     ->compose('layouts/reset-password',
                         ['resetLink' => $resetUrl]
                     )
-                    ->setFrom('stas_garcia@mail.ru')
+                    ->setFrom('email@mail.ru')
                     ->setTo($this->email)
                     ->setSubject('Восстановление пароля tracky-searches.ru')
                     ->send();

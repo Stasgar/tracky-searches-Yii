@@ -66,14 +66,16 @@ class AuthorizationController extends Controller
                             'authLink' => $authurl,
                         ]
                     )
-                    ->setFrom('your-email')
+                    ->setFrom('email@mail.ru')
                     ->setTo($modelSignup->user_email)
                     ->setSubject('Подтверждение аккаунта tracky-searches.ru')
                     ->send();
                 }
                 catch(\Swift_TransportException $e)
                 {
-                    echo "К сожалению мы не смогли отправить сообщение на указанный адрес.";
+                    echo "К сожалению мы не смогли отправить сообщение на указанный адрес.<br>";
+                    echo $e->getMessage();
+                    die;
                 }
 
                 return Yii::$app->response->redirect(Url::to(['success']));
