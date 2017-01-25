@@ -72,9 +72,10 @@ class Chat extends \yii\db\ActiveRecord
     */
     public function getNewMessagesCount($last_message_id)
     {
-        $message = $this->find()->orderBy(['message_id' => SORT_DESC])->one();
-
-        return $message->message_id - $last_message_id;
+        if($message = $this->find()->orderBy(['message_id' => SORT_DESC])->one())
+            return $message->message_id - $last_message_id;
+        else
+            return 0;
     }
 
     public function getUser()
