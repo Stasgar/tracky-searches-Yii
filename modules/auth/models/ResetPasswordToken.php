@@ -47,9 +47,4 @@ class ResetPasswordToken extends \yii\db\ActiveRecord
             'expires' => 'Expires',
         ];
     }
-
-    public function generateToken()
-    {
-
-    }
 }
