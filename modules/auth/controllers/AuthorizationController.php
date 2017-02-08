@@ -14,6 +14,30 @@ use Yii;
  */
 class AuthorizationController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+            'class' => \yii\filters\AccessControl::className(),
+            'rules' => [
+                [
+                    'actions' => ['index', 'authorize', 'activation', 'success'],
+                    'allow' => true,
+                    'roles' => ['?']
+                ],
+                [
+                    'actions' => ['logout'],
+                    'allow' => true,
+                    'roles' => ['@']
+                ],
+
+            ],
+            ]
+        ];
+    }
+
+
     /**
      * Renders the index view for the module
      * @return string

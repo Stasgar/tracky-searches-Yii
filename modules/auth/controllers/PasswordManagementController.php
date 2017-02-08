@@ -48,7 +48,7 @@ class PasswordManagementController extends Controller
                 return $this->goHome();
 
         }
-        else //если токена нет, то производим изменение п
+        else //если токена
         {
             echo 'no reset token';die;
         }
