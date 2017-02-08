@@ -19,7 +19,7 @@ class PasswordManagementController extends Controller
             $modelPasswordChange = new PasswordChangeForm();
 
             $resetPasswordModel = ResetPasswordToken::findOne(['token' => $token]);
-            if($resetPasswordModel)
+            if($resetPasswordModel && $resetPasswordModel->expires > Date('Y-m-d h:m:s'))
             {
                 if($resetPasswordModel->expires > Date('Y-m-d h:m:s'))
                 {
@@ -32,27 +32,26 @@ class PasswordManagementController extends Controller
                             $modelPasswordChange->changeUserPassword($resetPasswordModel);
                             return $this->render('ChangeSuccess');
                         }
-                        
                     }
                     
                     return $this->render('PasswordChange', ['model' => $modelPasswordChange]);
                 }
                 else
                 {
-                    echo 'token is not valid anymore, it stays active only for 30 mins';
-                    return $this->goHome();
+                    return $this->render('@app/views/site/error', 
+                        [
+                            'name'=>'Ошибка валидации', 
+                            'message'=>'Срок действия вашей уникальной ссылки истек. Срок действия - 30 минут с момента получения.']
+                    );
                 }
             }
-
-                echo 'token is not valid';
-                return $this->goHome();
-
         }
-        else //если токена
-        {
-            echo 'no reset token';die;
-        }
-        
+            return $this->render('@app/views/site/error', 
+                [
+                    'name'=>'Ошибка валидации', 
+                    'message'=>'Ваша ссылка восстановления не действительна.']
+            );
+
     }
 
     public function actionResetPasswordRequest()
