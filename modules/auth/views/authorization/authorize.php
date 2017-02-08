@@ -42,7 +42,7 @@
             ?>
             
             <?= Html::submitButton('Вход',['class'=>'btn btn-success']); ?>
-            <a class="pull-right" href="<?= Url::toRoute(['/reset-password']) ?>">Забыли пароль?</a>
+            <button class="btn btn-success pull-right"><a style="text-decoration: none; color:white" class="pull-right" href="<?= Url::toRoute(['/reset-password']) ?>">Забыли пароль?</a></button>
         <?php ActiveForm::end(); ?>
         <?php Pjax::end(); ?>
         </div>
