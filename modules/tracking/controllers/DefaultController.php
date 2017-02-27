@@ -32,9 +32,9 @@ class DefaultController extends Controller
         
         $data = Array();
 
-        $modelChat = new Chat();
-        $modelTrack = new Track();
-        $modelSaved = new Saved();
+        
+        
+        
 
         //стандартные параметры для вывода кол-ва сообщений
         $message_count = 5;
@@ -47,6 +47,7 @@ class DefaultController extends Controller
         if (isset($_COOKIE["last_message_id"]))
             $last_message_id = $_COOKIE["last_message_id"];
 
+        $modelTrack = new Track();
         // При получении запроса из формы отслеживания посылки
         if(Yii::$app->request->post('Track') || $track !== false)
         {
@@ -86,6 +87,7 @@ class DefaultController extends Controller
             }
         }
 
+        $modelChat = new Chat();
         // при получении запроса из формы чата
         if(Yii::$app->request->post('Chat'))
         {
@@ -108,7 +110,6 @@ class DefaultController extends Controller
         $data['modelTrack'] = $modelTrack;
         $data['modelChat'] = $modelChat;
         $data['savedList'] = Saved::getSaved();
-        $data['modelSaved'] = $modelSaved;
 
         return $this->render('index',$data);
     }
