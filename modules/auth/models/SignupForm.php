@@ -5,7 +5,7 @@ namespace app\modules\auth\models;
 use app\models\User;
 use yii\base\Model;
 
-class Signup extends Model
+class SignupForm extends Model
 {
     public $user_name;
     public $user_password;
