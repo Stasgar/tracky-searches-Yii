@@ -10,18 +10,21 @@ use app\modules\auth\models\PasswordResetRequestForm;
 use app\modules\auth\models\PasswordChangeForm;
 use app\modules\auth\models\ResetPasswordToken;
 
+use app\components\SendEmail;
+
 class PasswordManagementController extends Controller
 {
     public function actionChangePassword($token = false)
     {
+
         if($token) //если token получен, то производим восстановление пароля
         {
             $modelPasswordChange = new PasswordChangeForm();
-
             $resetPasswordModel = ResetPasswordToken::findOne(['token' => $token]);
-            if($resetPasswordModel && $resetPasswordModel->expires > Date('Y-m-d h:m:s'))
+
+            if($resetPasswordModel)
             {
-                if($resetPasswordModel->expires > Date('Y-m-d h:m:s'))
+                if($resetPasswordModel->expires > Date('Y-m-d h:i:s'))
                 {
                     if(Yii::$app->request->post('PasswordChangeForm'))
                     {
@@ -46,12 +49,12 @@ class PasswordManagementController extends Controller
                 }
             }
         }
-            return $this->render('@app/views/site/error', 
-                [
-                    'name'=>'Ошибка валидации', 
-                    'message'=>'Ваша ссылка восстановления не действительна.']
-            );
 
+        return $this->render('@app/views/site/error', 
+            [
+                'name'=>'Ошибка валидации', 
+                'message'=>'Ваша ссылка восстановления не действительна.']
+        );
     }
 
     public function actionResetPasswordRequest()
@@ -64,7 +67,19 @@ class PasswordManagementController extends Controller
 
             if($model->validate())
             {
-                $model->sendResetLink();
+                define("EXPIRE_TIME", 30);//время в минутах, после которого токен считается не валидным
+                $user = User::findOne(['user_email' => $model->email]);//получаем пользователя по имейлу
+
+                $resetPasswordToken = new ResetPasswordToken();
+                $resetPasswordToken->user_id = $user->user_id;
+                $resetPasswordToken->token = sha1(mt_rand(10000, 99999).time());//генерация рандомного токена
+                $resetPasswordToken->expires = Date('Y-m-d h:i:s', strtotime("+".EXPIRE_TIME." minutes"));
+
+                $resetUrl = Url::base(true).Url::toRoute(['/change-password', 'token' => $resetPasswordToken->token]);
+
+                if($resetPasswordToken->save())
+                    SendEmail::sendResetPasswordMail($model->email, $resetUrl);
+
                 return $this->render('ResetSuccess');
             }
         }

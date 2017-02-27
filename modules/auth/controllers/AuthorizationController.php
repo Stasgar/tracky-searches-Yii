@@ -3,11 +3,13 @@
 namespace app\modules\auth\controllers;
 use yii\web\Controller;
 
-use app\modules\auth\models\Signup;
-use app\modules\auth\models\Login;
+use app\modules\auth\models\SignupForm;
+use app\modules\auth\models\LoginForm;
 use yii\helpers\Url;
 use app\models\User;
 use Yii;
+
+use app\components\SendEmail;
 
 /**
  * Default controller for the `auth` module
@@ -37,7 +39,6 @@ class AuthorizationController extends Controller
         ];
     }
 
-
     /**
      * Renders the index view for the module
      * @return string
@@ -50,18 +51,12 @@ class AuthorizationController extends Controller
     public function actionAuthorize()
     {
         
-        $modelLogin = new Login();
-        $modelSignup = new Signup();
-
-        $tab = false;
-
+        $modelLogin = new LoginForm();
         // При получении запроса на вход
         if(Yii::$app->request->post('Login'))
         {
             $modelLogin->attributes = Yii::$app->request->post('Login');
             
-            $tab='#login';//which tab to open
-
             //При удачной авторизации производится переход на главную страницу
             if($modelLogin->validate())
             {
@@ -70,6 +65,7 @@ class AuthorizationController extends Controller
             }
         }
 
+        $modelSignup = new SignupForm();
         // При получении запроса на регистрацию
         $authurl = 'empty_url';
         if(Yii::$app->request->post('Signup'))
@@ -77,30 +73,11 @@ class AuthorizationController extends Controller
             $modelSignup->attributes = Yii::$app->request->post('Signup');
             $modelSignup->user_authkey=sha1(mt_rand(10000, 99999).time().$modelSignup->user_email);
 
-            $tab='#signup';//which tab to open
             if($modelSignup->validate() && $modelSignup->signup())
             {
                 $authurl = Url::base(true).Url::to(['authorization/activation','authkey'=>$modelSignup->user_authkey]);
 
-                try{
-                Yii::$app->mailer
-                    ->compose('layouts/activate-account',
-                        [
-                            'userName' => $modelSignup->user_name,
-                            'authLink' => $authurl,
-                        ]
-                    )
-                    ->setFrom('email@mail.ru')
-                    ->setTo($modelSignup->user_email)
-                    ->setSubject('Подтверждение аккаунта tracky-searches.ru')
-                    ->send();
-                }
-                catch(\Swift_TransportException $e)
-                {
-                    echo "К сожалению мы не смогли отправить сообщение на указанный адрес.<br>";
-                    echo $e->getMessage();
-                    die;
-                }
+                SendEmail::sendActivationMail($modelSignup->user_name, $modelSignup->user_email, $authurl);
 
                 return Yii::$app->response->redirect(Url::to(['success']));
             }
@@ -109,12 +86,9 @@ class AuthorizationController extends Controller
         return $this->render( 'authorize', 
             [
                 'modelLogin'=>$modelLogin, 
-                'modelSignup'=>$modelSignup, 
-                'authurl'=>$authurl,
-                'tab' => $tab
+                'modelSignup'=>$modelSignup,
             ]
         );
-
     }
 
     /**
@@ -135,7 +109,7 @@ class AuthorizationController extends Controller
     */
     public function actionActivation($authkey)
     {
-        $model = new Signup();
+        $model = new SignupForm();
 
         $status = $model->activate($authkey);
 
