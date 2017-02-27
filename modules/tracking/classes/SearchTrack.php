@@ -5,6 +5,8 @@ use app\modules\tracking\classes\ServiceFI;
 use app\modules\tracking\classes\ServiceNL;
 use app\modules\tracking\classes\ServiceSG;
 
+use Yii;
+
 class SearchTrack
 {
     
@@ -17,12 +19,11 @@ class SearchTrack
     */
     public function getParcelInfo($track_number)
     {
-        //$this->track = $track_number;
         //вырезает последние два символа из предоставленного трека
         $type = substr($track_number, strlen($track_number)-2, 2); 
         
-        $serviceName = 'Service'.$type;
-        $serviceModel = 'app\\modules\\tracking\\classes\\'.$serviceName;
+        $serviceName = '\Service'.$type;
+        $serviceModel = __NAMESPACE__.$serviceName;
         $service = new $serviceModel;
 
         $result = $this->getArrayInfo($service, $track_number);
