@@ -4,6 +4,10 @@ body {
 
 }
 
+.navbar{
+    border-bottom:7px solid #F46026;
+}
+
 .help-block{
     font-size:120%;
 }
