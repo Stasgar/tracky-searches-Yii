@@ -53,9 +53,9 @@ class AuthorizationController extends Controller
         
         $modelLogin = new LoginForm();
         // При получении запроса на вход
-        if(Yii::$app->request->post('Login'))
+        if(Yii::$app->request->post('LoginForm'))
         {
-            $modelLogin->attributes = Yii::$app->request->post('Login');
+            $modelLogin->attributes = Yii::$app->request->post('LoginForm');
             
             //При удачной авторизации производится переход на главную страницу
             if($modelLogin->validate())
@@ -68,9 +68,9 @@ class AuthorizationController extends Controller
         $modelSignup = new SignupForm();
         // При получении запроса на регистрацию
         $authurl = 'empty_url';
-        if(Yii::$app->request->post('Signup'))
+        if(Yii::$app->request->post('SignupForm'))
         {
-            $modelSignup->attributes = Yii::$app->request->post('Signup');
+            $modelSignup->attributes = Yii::$app->request->post('SignupForm');
             $modelSignup->user_authkey=sha1(mt_rand(10000, 99999).time().$modelSignup->user_email);
 
             if($modelSignup->validate() && $modelSignup->signup())
