@@ -1,5 +1,6 @@
 <?php
     use yii\helpers\Html;
+    use app\widgets\AvatarWidget;
     $this->registerJsFile('js/bootstrap-filestyle.min.js');
     $this->title = "Мой аккаунт";
 ?>
@@ -12,14 +13,14 @@
         <div class="image-block col-md-12 row">
             <?php if($name_param === false): ?>
                 <div class="col-md-offset-2 col-md-3">
-                    <?= Html::showUserAvatar(150, $userInfo->user_avatar) ?>
+                    <?= AvatarWidget::widget(['size'=>'150px', 'avatarName'=>$userInfo->user_avatar]) ?>
                 </div>
                 <div class="image-upload col-md-6">
                     <?= $this->render('imageUploadForm', ['modelImageUpload'=>$modelImageUpload]);  ?>
                 </div>
             <?php else: ?>
                 <div class="col-md-offset-4 col-md-3">
-                    <?= Html::showUserAvatar(150, $userInfo->user_avatar) ?>
+                    <?= AvatarWidget::widget(['size'=>'150px', 'avatarName'=>$userInfo->user_avatar]) ?>
                 </div>
             <?php endif; ?>
         </div>

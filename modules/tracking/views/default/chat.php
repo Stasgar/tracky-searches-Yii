@@ -4,6 +4,8 @@
     use yii\widgets\Pjax;
     use yii\helpers\Url;
 
+    use app\widgets\AvatarWidget;
+
     $this->registerJsFile(Yii::$app->request->baseUrl.'/js/chat.js');
 ?>
 
@@ -22,7 +24,7 @@
                     <?php $bubbleClass = (!Yii::$app->user->isGuest && Yii::$app->user->identity->user_id == $message->user->user_id)? 'message-bouble-mine' : 'message-bouble'; ?>
                 <div class="message <?= $bubbleClass ?>" id="<?= $message->message_id ?>">
                 <p>
-                <?= Html::showUserAvatar(40, $message->user->user_avatar) ?>
+                    <?= AvatarWidget::widget(['size'=>'40px', 'avatarName'=>$message->user->user_avatar]) ?>
                 <a class="chat-username" href="<?= Url::toRoute(['/user/'.$message->user->user_name]) ?>"><?= Html::encode($message->user->user_name) ?></a>
                 <sup class="datatime-chat"><?= Html::encode($message->datetime) ?></sup>
                 </p>

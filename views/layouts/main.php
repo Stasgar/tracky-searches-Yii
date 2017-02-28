@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\helpers\Url;
+use app\widgets\AvatarWidget;
 
 
 AppAsset::register($this);
@@ -47,7 +48,7 @@ AppAsset::register($this);
                 ['label' => '<span class="glyphicon glyphicon-log-in"></span> Регистрация/Вход', 'url' => ['/auth/authorization/authorize']]
             ) : (
                 [
-                'label' => '<span class="glyphicon glyphicon-user"></span> ' . Html::encode(Yii::$app->user->identity->user_name)  .' ' . Html::showUserAvatar(22),
+                'label' => '<span class="glyphicon glyphicon-user"></span> ' . Html::encode(Yii::$app->user->identity->user_name)  .' ' . AvatarWidget::widget(['size'=>'22px']),
                     'items' => [
                         ['label' => '<span class="glyphicon glyphicon-user"></span> Мой аккаунт' , 'url' => ['/user/default/user-info']],
                         Yii::$app->user->can('viewAdminPage') ? (
