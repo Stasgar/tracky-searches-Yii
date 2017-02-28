@@ -27,6 +27,17 @@ $config = [
             'siteKey' => 'your-sitekey',
             'secret' => 'your-secret',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'css' => ['bootstrap/css/bootstrap.css'],
+                    'js' => ['bootstrap/js/bootstrap.js']
+                ],
+            ],
+        ],
         'view' => [
             'class' => 'yii\web\View',
             'renderers' => [
