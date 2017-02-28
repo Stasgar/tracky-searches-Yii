@@ -38,15 +38,11 @@ return [
 ];
 ```
 
-В контроллере авторизации `modules/auth/controllers/AuthorizationController.php` следует заменить значение отправителя:
+В классе для отправки сообщений на почту `components/SendEmail.php` следует заменить значение константы `EMAIL_FROM` (отправителя):
 ```php
-->setFrom('email@mail.ru')
+const EMAIL_FROM = 'email@mail.ru';
 ```
 
-В модели формы ввода почтового адреса `modules/auth/models/PasswordResetRequestForm.php` следует заменить такое-же значение:
-```php
-->setFrom('email@mail.ru')
-```
 *Подробнее о работе SwiftMailer можно узнать в [официальной документации](http://swiftmailer.org/docs/introduction.html) плагина.*
 
 ##### |База Данных
