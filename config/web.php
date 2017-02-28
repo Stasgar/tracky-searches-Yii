@@ -34,7 +34,6 @@ $config = [
                     'basePath' => '@webroot',
                     'baseUrl' => '@web',
                     'css' => ['bootstrap/css/bootstrap.css'],
-                    'js' => ['bootstrap/js/bootstrap.js']
                 ],
             ],
         ],
