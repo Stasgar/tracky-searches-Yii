@@ -7,7 +7,7 @@ use Yii;
 
 class SendEmail
 {
-    const EMAIL_FROM = 'stas_garcia@mail.ru';
+    const EMAIL_FROM = 'email@mail.ru';
 
     public static function sendActivationMail($user_name, $email, $authurl)
     {
