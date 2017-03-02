@@ -17,11 +17,11 @@ class AvatarWidget extends Widget
         parent::init();
         if($this->avatarName === false)
         {
-            $this->avatarHtml = '<img style="border-radius:50%" width='.$this->size.'px height='.$this->size.'px src="' .'/storage/avatars/' . Yii::$app->user->identity->user_avatar . '" class="user-avatar">';
+            $this->avatarHtml = '<img style="border-radius:50%" width='.$this->size.'px height='.$this->size.'px src="' .Yii::getAlias('@web/storage/avatars/') . Yii::$app->user->identity->user_avatar . '" class="user-avatar">';
         }
         else
         {
-            $this->avatarHtml =  '<img style="border-radius:50%" width='.$this->size.'px height='.$this->size.'px src="' .'/storage/avatars/' . $this->avatarName . '" class="user-avatar">';
+            $this->avatarHtml =  '<img style="border-radius:50%" width='.$this->size.'px height='.$this->size.'px src="' .Yii::getAlias('@web/storage/avatars/') . $this->avatarName . '" class="user-avatar">';
         }
 
 
