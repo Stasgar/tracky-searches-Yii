@@ -4,6 +4,9 @@ namespace app\modules\tracking\classes;
 use app\modules\tracking\classes\AbstractPostService;
 use app\modules\tracking\classes\ParseHelper;
 
+/*
+    Класс-алгоритм, используемый для поиска информации для треков с типом "FI"(финляндия)
+*/
 class ServiceFI extends AbstractPostService
 {
     public function getResult($track)

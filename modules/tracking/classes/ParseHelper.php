@@ -1,6 +1,9 @@
 <?php
 namespace app\modules\tracking\classes;
 
+/*
+    Класс-помощник, предоставляет упрощенный интерфейс парсинга страницы.
+*/
 class ParseHelper
 {
     //Метод для парсинга пост-запросом

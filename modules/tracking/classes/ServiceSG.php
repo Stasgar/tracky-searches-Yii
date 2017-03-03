@@ -5,6 +5,9 @@ use app\modules\tracking\classes\AbstractPostService;
 use app\modules\tracking\classes\ParseHelper;
 use DOMDocument;
 
+/*
+    Класс-алгоритм, используемый для поиска информации для треков с типом "SG"(сингапур)
+*/
 class ServiceSG extends AbstractPostService
 {
     public function getResult($track)
