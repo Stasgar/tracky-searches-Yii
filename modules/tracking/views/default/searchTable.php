@@ -43,14 +43,17 @@
 <div class="search-results-block">
 
 <div id="trackStatusTable">
-
+    
+    <?php if( Yii::$app->params['googleTranslate']['active'] ):?>
     <div id="translate-switch">
         <label class="switch">
-            <input type="checkbox" id="translate-checkbox" checked="checked">
+            <input type="checkbox" id="translate-checkbox">
+            <!-- unchecked if no/false cookie 'translate_status' -->
             <div class="slider"></div>
         </label>
         <div id="switch-text"><h4>Переводить статусы</h4></div>
     </div>
+    <?php endif; ?>
 
     <hr>
     <div id="trackStatusTableHeader"></div>
@@ -106,10 +109,10 @@ var isTranslateChecked;
 
     function initTranslation()
     {
-        if(getCookie('translate_status') === 'false')
-            isTranslateChecked = false
+        if(getCookie('translate_status') === 'true')
+            isTranslateChecked = true
         else
-            isTranslateChecked = true;
+            isTranslateChecked = false;
 
         $( "#translate-checkbox" ).prop( "checked", isTranslateChecked );
     }
