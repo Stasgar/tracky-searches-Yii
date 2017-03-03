@@ -19,12 +19,10 @@ class Track extends \yii\base\Model
 
     public function searchForInfo()
     {
-        Yii::info('searchForInfo() initialized with track:' . $this->trackNumber);
-        $searchTrack = new SearchTrack();
-       
-        $searchResults = $searchTrack->getParcelInfo($this->trackNumber);
 
-        Yii::info('searchForInfo[2], info:' . json_encode($searchResults));
+        $searchTrack = new SearchTrack($this->trackNumber);
+        $searchResults = $searchTrack->getParcelInfo();
+
         return $searchResults;
         
     }
@@ -35,11 +33,8 @@ class Track extends \yii\base\Model
     */
     public function isAvailable($attributes)
     {
-        $searchTrack = new SearchTrack();
-        $availableServices = $searchTrack->availableServices;
-        $type = substr($this->trackNumber, strlen($this->trackNumber)-2, 2);
-
-        if(!in_array($type, $availableServices))
+        $searchTrack = new SearchTrack($this->trackNumber);
+        if( !$searchTrack->isAvailable() )
         {
             $this->addError($attributes, 'К сожалению данный тип трек-номера не поддерживается нашей системой');
         }
