@@ -19,16 +19,13 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/loader.css',
-        'css/background.css',
+        'css/loaders.css',
         'https://fonts.googleapis.com/css?family=Poiret+One',
-        'css/ajax-spinner.css',
         'css/searchTableLine.css',
         'css/translateSwitch.css'
         
     ];
     public $js = [
-        'js/activation.js',
         'js/cookies.js'
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];

@@ -1,5 +1,5 @@
 <?php 
-    $this->registerCssFile(Yii::$app->request->baseUrl.'/css/loader.css');
+    $this->registerCssFile(Yii::$app->request->baseUrl.'/css/loaders.css');
 
     use yii\helpers\Url;
 
