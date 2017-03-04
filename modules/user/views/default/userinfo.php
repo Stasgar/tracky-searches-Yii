@@ -8,7 +8,7 @@
 <h1 class="col-md-8 col-md-offset-2">Профиль пользователя</h1>
 
 <div class="well container col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-<?php //Pjax::begin() ?>
+
     <div class="user-info">
         <div class="image-block col-md-12 row">
             <?php if($name_param === false): ?>
@@ -48,9 +48,5 @@
             </table>
         </div>
     </div>
-    
-    
-    
-<?php //Pjax::end() ?>
 
 </div>
