@@ -5,8 +5,6 @@ ftpsync.settings
 
 # custom ignore
 public_html/assets/*
-config/db.php
-config/web.php
 
 # netbeans project files
 nbproject
