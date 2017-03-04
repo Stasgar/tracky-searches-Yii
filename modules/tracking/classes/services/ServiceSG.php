@@ -1,14 +1,15 @@
 <?php
-namespace app\modules\tracking\classes;
+namespace app\modules\tracking\classes\services;
 
-use app\modules\tracking\classes\AbstractPostService;
+use app\modules\tracking\classes\ServiceInterface;
 use app\modules\tracking\classes\ParseHelper;
+use app\modules\tracking\classes\Translator;
 use DOMDocument;
 
 /*
     Класс-алгоритм, используемый для поиска информации для треков с типом "SG"(сингапур)
 */
-class ServiceSG extends AbstractPostService
+class ServiceSG implements ServiceInterface
 {
     public function getResult($track)
     {
@@ -38,7 +39,7 @@ class ServiceSG extends AbstractPostService
         for ($i = count($data)-1; $i >= 0; $i--){
             $result['track_status'][] = array(
                 'status-en' => trim($data[$i][1]),
-                'status-ru' => self::translateText(trim($data[$i][1])),
+                'status-ru' => Translator::translateText(trim($data[$i][1])),
                 'time' => trim($data[$i][0])
             );
         }

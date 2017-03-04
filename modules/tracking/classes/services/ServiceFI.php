@@ -1,13 +1,14 @@
 <?php
-namespace app\modules\tracking\classes;
+namespace app\modules\tracking\classes\services;
 
-use app\modules\tracking\classes\AbstractPostService;
+use app\modules\tracking\classes\ServiceInterface;
 use app\modules\tracking\classes\ParseHelper;
+use app\modules\tracking\classes\Translator;
 
 /*
     Класс-алгоритм, используемый для поиска информации для треков с типом "FI"(финляндия)
 */
-class ServiceFI extends AbstractPostService
+class ServiceFI implements ServiceInterface
 {
     public function getResult($track)
     {
@@ -31,7 +32,7 @@ class ServiceFI extends AbstractPostService
         for ($i = count($items)-1; $i >= 0; $i--){
             $result['track_status'][] = array(
                 'status-en' => $items[$i]['description']['en'],
-                'status-ru' =>self::translateText($items[$i]['description']['en']),
+                'status-ru' =>Translator::translateText($items[$i]['description']['en']),
                 'time' => date('Y-m-d H:i:s', strtotime($items[$i]['timestamp'])),
                 'place' => $items[$i]['locationName'].' '.$items[$i]['locationCode']
             );

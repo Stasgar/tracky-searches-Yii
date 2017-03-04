@@ -1,29 +1,27 @@
 <?php
 namespace app\modules\tracking\classes;
+
+use app\modules\tracking\classes\ParseHelper;
+
 use Yii;
 
-abstract class AbstractPostService
+class Translator
 {
-    /*
-        Абстрактный метод, возвращаемое значение - массив с данными об отправлении.
-    */
-    abstract public function getResult($track);
-
     /*
         Метод для перевода статуса, используется google api.
     */
     public static function translateText($text)
     {
+
+        if(Yii::$app->params['googleTranslate']['active'] == false)
+        {
+            return '-';
+        }
+
         $text = rawurlencode($text);
         $apiKey = Yii::$app->params['googleTranslate']['key'];
         $apiLink = 'https://www.googleapis.com/language/translate/v2?key='.$apiKey.'&q='.$text.'&source=en&target=ru';
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $apiLink);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $rawResponse = curl_exec($curl);
-        curl_close($curl);
+        $rawResponse = ParseHelper::parse_get($apiLink);
 
         $response = json_decode($rawResponse);
 
@@ -37,5 +35,4 @@ abstract class AbstractPostService
         }
 
     }
-
 }

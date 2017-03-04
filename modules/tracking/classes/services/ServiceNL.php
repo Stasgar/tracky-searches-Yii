@@ -1,13 +1,14 @@
 <?php
-namespace app\modules\tracking\classes;
+namespace app\modules\tracking\classes\services;
 
-use app\modules\tracking\classes\AbstractPostService;
+use app\modules\tracking\classes\ServiceInterface;
 use app\modules\tracking\classes\ParseHelper;
+use app\modules\tracking\classes\Translator;
 
 /*
     Класс-алгоритм, используемый для поиска информации для треков с типом "NL"(нидерланды)
 */
-class ServiceNL extends AbstractPostService
+class ServiceNL implements ServiceInterface
 {
     public function getResult($track)
     {
@@ -37,7 +38,7 @@ class ServiceNL extends AbstractPostService
         for ($i = count($data)-1; $i >= 0; $i--){
             $result['track_status'][] = array(
                 'status-en' => $data[$i][1],
-                'status-ru' => self::translateText($data[$i][1]),
+                'status-ru' => Translator::translateText($data[$i][1]),
                 'time' =>  date('Y-m-d H:i:s', strtotime($data[$i][0]))
             );
         }
