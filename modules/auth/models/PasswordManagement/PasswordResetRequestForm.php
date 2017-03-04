@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\auth\models;
+namespace app\modules\auth\models\PasswordManagement;
 
 use yii\helpers\Url;
 use app\models\User;
 use yii\base\Model;
 use Yii;
 
-use app\modules\auth\models\ResetPasswordToken;
+use app\modules\auth\models\PasswordManagement\ResetPasswordToken;
 use himiklab\yii2\recaptcha\ReCaptchaValidator;
 
 class PasswordResetRequestForm extends Model

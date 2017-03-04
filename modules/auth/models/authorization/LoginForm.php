@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\auth\models;
+namespace app\modules\auth\models\authorization;
 
 use app\models\User;
 use yii\base\Model;

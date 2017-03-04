@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\auth\models;
+namespace app\modules\auth\models\PasswordManagement;
 
 use Yii;
 

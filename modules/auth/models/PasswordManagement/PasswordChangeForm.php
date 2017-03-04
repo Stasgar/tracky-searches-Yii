@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\auth\models;
+namespace app\modules\auth\models\PasswordManagement;
 
 use app\models\User;
 use yii\base\Model;
 
-use app\modules\auth\models\ResetPasswordToken;
+use app\modules\auth\models\PasswordManagement\ResetPasswordToken;
 
 class PasswordChangeForm extends Model
 {

@@ -3,8 +3,8 @@
 namespace app\modules\auth\controllers;
 use yii\web\Controller;
 
-use app\modules\auth\models\SignupForm;
-use app\modules\auth\models\LoginForm;
+use app\modules\auth\models\authorization\SignupForm;
+use app\modules\auth\models\authorization\LoginForm;
 use yii\helpers\Url;
 use app\models\User;
 use Yii;

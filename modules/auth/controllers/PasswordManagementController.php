@@ -6,9 +6,9 @@ use yii\helpers\Url;
 use app\models\User;
 use Yii;
 
-use app\modules\auth\models\PasswordResetRequestForm;
-use app\modules\auth\models\PasswordChangeForm;
-use app\modules\auth\models\ResetPasswordToken;
+use app\modules\auth\models\PasswordManagement\PasswordResetRequestForm;
+use app\modules\auth\models\PasswordManagement\PasswordChangeForm;
+use app\modules\auth\models\PasswordManagement\ResetPasswordToken;
 
 use app\components\SendEmail;
 
