@@ -47,4 +47,19 @@ class ResetPasswordToken extends \yii\db\ActiveRecord
             'expires' => 'Expires',
         ];
     }
+
+    /*
+        Возвращает true, если время действия токена истекло
+    */
+    public function expires()
+    {
+        $currentDate = Date('Y-m-d h:i:s');
+        $expiresDate = $this->expires;
+        if( $expiresDate < $currentDate )
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

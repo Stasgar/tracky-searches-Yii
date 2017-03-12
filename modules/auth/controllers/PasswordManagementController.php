@@ -14,48 +14,6 @@ use app\components\SendEmail;
 
 class PasswordManagementController extends Controller
 {
-    public function actionChangePassword($token = false)
-    {
-
-        if($token) //если token получен, то производим восстановление пароля
-        {
-            $modelPasswordChange = new PasswordChangeForm();
-            $resetPasswordModel = ResetPasswordToken::findOne(['token' => $token]);
-
-            if($resetPasswordModel)
-            {
-                if($resetPasswordModel->expires > Date('Y-m-d h:i:s'))
-                {
-                    if(Yii::$app->request->post('PasswordChangeForm'))
-                    {
-                        $modelPasswordChange->attributes = Yii::$app->request->post('PasswordChangeForm');
-
-                        if($modelPasswordChange->validate())
-                        {
-                            $modelPasswordChange->changeUserPassword($resetPasswordModel);
-                            return $this->render('ChangeSuccess');
-                        }
-                    }
-                    
-                    return $this->render('PasswordChange', ['model' => $modelPasswordChange]);
-                }
-                else
-                {
-                    return $this->render('@app/views/site/error', 
-                        [
-                            'name'=>'Ошибка валидации', 
-                            'message'=>'Срок действия вашей уникальной ссылки истек. Срок действия - 30 минут с момента получения.']
-                    );
-                }
-            }
-        }
-
-        return $this->render('@app/views/site/error', 
-            [
-                'name'=>'Ошибка валидации', 
-                'message'=>'Ваша ссылка восстановления не действительна.']
-        );
-    }
 
     public function actionResetPasswordRequest()
     {
@@ -67,9 +25,11 @@ class PasswordManagementController extends Controller
 
             if($model->validate())
             {
-                define("EXPIRE_TIME", 30);//время в минутах, после которого токен считается не валидным
+                define("EXPIRE_TIME", 30); //время в минутах, после которого токен считается не валидным
+
                 $user = User::findOne(['user_email' => $model->email]);//получаем пользователя по имейлу
 
+                //формирование записи в таблице reset_password_token
                 $resetPasswordToken = new ResetPasswordToken();
                 $resetPasswordToken->user_id = $user->user_id;
                 $resetPasswordToken->token = sha1(mt_rand(10000, 99999).time());//генерация рандомного токена
@@ -78,7 +38,9 @@ class PasswordManagementController extends Controller
                 $resetUrl = Url::base(true).Url::toRoute(['/change-password', 'token' => $resetPasswordToken->token]);
 
                 if($resetPasswordToken->save())
+                {
                     SendEmail::sendResetPasswordMail($model->email, $resetUrl);
+                }
 
                 return $this->render('ResetSuccess');
             }
@@ -86,4 +48,41 @@ class PasswordManagementController extends Controller
 
         return $this->render('PasswordResetRequestForm', ['model'=>$model]);
     }
+
+    public function actionChangePassword($token = false)
+    {
+        $message = 'Ваша ссылка восстановления не действительна';
+
+        if($token) //если token получен, то производим восстановление пароля
+        {
+            $model = new PasswordChangeForm();
+            $resetPasswordToken = ResetPasswordToken::findOne(['token' => $token]);
+            
+            //проверка наличия и валидности токена
+            if($resetPasswordToken && ! $resetPasswordToken->expires())
+            {
+                if(Yii::$app->request->post('PasswordChangeForm'))
+                {
+                    $model->attributes = Yii::$app->request->post('PasswordChangeForm');
+
+                    if($model->validate())
+                    {
+                        $model->changeUserPassword($resetPasswordToken);
+                        return $this->render('ChangeSuccess');
+                    }
+                }
+                
+                return $this->render('PasswordChange', ['model' => $model]);
+            }
+
+            $message = 'Срок действия вашей уникальной ссылки истек. Срок действия - 30 минут с момента получения';
+        }
+
+        return $this->render('@app/views/site/error', 
+            [
+                'name'=>'Ошибка валидации', 
+                'message'=>$message]
+        );
+    }
+
 }
