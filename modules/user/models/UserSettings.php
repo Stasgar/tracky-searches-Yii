@@ -19,22 +19,27 @@ class UserSettings extends \yii\base\Model
     public function uploadImage()
     {
         define('DEFAULT_AVATAR_NAME', 'default.jpg');
+        define('AVATARS_PATH', 'storage/avatars/');
+
         if($this->validate())
         {
-            $modelUser = new User;
-            $userName = Yii::$app->user->identity->user_name;
-            if(Yii::$app->user->identity->user_avatar !== DEFAULT_AVATAR_NAME)
+            $currentUser = Yii::$app->user->identity;
+
+            $curUserAvatar = $currentUser->user_avatar;
+            
+            if($curUserAvatar !== DEFAULT_AVATAR_NAME)
             {
-                $oldAvatar = 'storage/avatars/'.Yii::$app->user->identity->user_avatar;
-                unlink($oldAvatar);
+                $oldAvatarFile = 'storage/avatars/' . $curUserAvatar;
+                unlink($oldAvatarFile);
             }
 
-            $this->imageFile
-                ->saveAs('storage/avatars/' . $this->formFileName($userName) . '.' . 'jpg');
+            $curUserName = $currentUser->user_name;
 
-            $modelUser = $modelUser
-                ->findOne(['user_name' => $userName]);
-            $modelUser->user_avatar = $this->formFileName($userName). '.' . 'jpg';
+            $newAvatarFileName = $this->formFileName($curUserName) . '.' . 'jpg';
+            $this->imageFile->saveAs(AVATARS_PATH . $newAvatarFileName);
+
+            $modelUser = User::findOne(['user_name' => $curUserName]);
+            $modelUser->user_avatar = $this->formFileName($curUserName). '.' . 'jpg';
 
             if($modelUser->save())
             {
@@ -42,7 +47,7 @@ class UserSettings extends \yii\base\Model
             }
         }
         
-            return false;
+        return false;
     }
 
     /**
