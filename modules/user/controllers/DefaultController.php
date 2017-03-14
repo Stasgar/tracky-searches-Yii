@@ -45,18 +45,20 @@ class DefaultController extends Controller
         }
         else
         {
-
             if(!$data['userInfo'] = User::findByUserName($name_param))
-                throw new \yii\web\NotFoundHttpException('Пользователя не существует');
+            {
+                throw new \yii\web\NotFoundHttpException('Пользователя с таким именем не существует');
+            }
         }
 
         $data['name_param'] = $name_param;
 
         $model = new UserSettings;
-        $data['modelImageUpload'] = new UserSettings;
+        $data['modelImageUpload'] = $model;
 
         if(Yii::$app->request->isPost)
         {
+            //загрузка изображения
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if($model->uploadImage())
             {
@@ -67,24 +69,4 @@ class DefaultController extends Controller
         return $this->render('userinfo', $data);
     }
 
-    /**
-    * Действие загрузки изображения профиля
-    */
-    public function actionUploadImage()
-    {
-        $model = new UserSettings;
-
-        if(Yii::$app->request->post('modelImageUpload'))
-        {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if($model->uploadImage())
-            {
-                echo 'done';
-            }
-        }
-        else
-        {
-            echo 'nope'; die;
-        }
-    }
 }
