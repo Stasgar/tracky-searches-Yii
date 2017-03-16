@@ -2,7 +2,6 @@
 
 namespace app\components;
 
-use app\modules\auth\models\Signup;
 use Yii;
 
 class SendEmail
