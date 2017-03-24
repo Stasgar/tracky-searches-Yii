@@ -25,20 +25,14 @@ class PasswordManagementController extends Controller
 
             if($model->validate())
             {
-                define("EXPIRE_TIME", 30); //время в минутах, после которого токен считается не валидным
-
+                
+                $resetPasswordToken = new ResetPasswordToken();
                 $user = User::findOne(['user_email' => $model->email]);//получаем пользователя по имейлу
 
-                //формирование записи в таблице reset_password_token
-                $resetPasswordToken = new ResetPasswordToken();
-                $resetPasswordToken->user_id = $user->user_id;
-                $resetPasswordToken->token = sha1(mt_rand(10000, 99999).time());//генерация рандомного токена
-                $resetPasswordToken->expires = Date('Y-m-d h:i:s', strtotime("+".EXPIRE_TIME." minutes"));
-
-                $resetUrl = Url::base(true).Url::toRoute(['/change-password', 'token' => $resetPasswordToken->token]);
-
-                if($resetPasswordToken->save())
+                if( $resetPasswordToken->createTokenForUser($user) )
                 {
+                    $token = $resetPasswordToken->token;
+                    $resetUrl = Url::base(true).Url::toRoute(['/change-password', 'token' => $token]);
                     SendEmail::sendResetPasswordMail($model->email, $resetUrl);
                 }
 

@@ -2,6 +2,7 @@
 
 namespace app\modules\auth\models\PasswordManagement;
 
+use app\models\User;
 use Yii;
 
 /**
@@ -62,4 +63,22 @@ class ResetPasswordToken extends \yii\db\ActiveRecord
 
         return false;
     }
+
+    //формирование записи в таблице reset_password_token
+    public function createTokenForUser(User $user)
+    {
+        define("EXPIRE_TIME", 30); //время в минутах, после которого токен считается не валидным
+
+        $this->user_id = $user->user_id;
+        $this->token = sha1(mt_rand(10000, 99999).time());//генерация рандомного токена
+        $this->expires = Date('Y-m-d h:i:s', strtotime("+".EXPIRE_TIME." minutes"));
+
+        if($this->save())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 }
