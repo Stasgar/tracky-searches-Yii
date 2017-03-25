@@ -6,18 +6,15 @@
     $this->title = "Активация аккаунта";
 ?>
 
-<?php if($status) :?>
+<?php if($userActivated) :?>
     
     <h1>Ваш аккаунт активирован, переходим на страницу авторизации</h1>
     <div class="loader col-md-2 col-md-offset-5"></div>
 
     <script>
-        setTimeout(
-    function(){
-        location="<?= Url::to(['authorization/authorize']) ?>";
-    }, 1000
-
-    );
+        setTimeout(function(){
+            location="<?= Url::to(['authorization/authorize']) ?>";
+        }, 1000);
     </script>
 
 <?php else: ?>
