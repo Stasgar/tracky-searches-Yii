@@ -109,11 +109,20 @@ class AuthorizationController extends Controller
     */
     public function actionActivation($authkey)
     {
-        $model = new SignupForm();
 
-        $status = $model->activate($authkey);
+        $userActivated = false;
 
-        return $this->render('activation',['status'=>$status]);
+        $user = new User;
+        if($user->find()->where(['user_authkey'=>$authkey])->exists())
+        {
+            $user = $user->find()->where(['user_authkey'=>$authkey])->one();
+            $user->user_activated = true;
+            $user->save();
+            $userActivated = true;
+        }
+        
+        return $this->render('activation', ['userActivated'=>$userActivated]);
+
     }
 
     /**

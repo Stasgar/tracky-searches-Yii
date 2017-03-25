@@ -59,21 +59,4 @@ class SignupForm extends Model
         return $user->save();
     }
 
-    /**
-    * Метод активации. Производит проверку переданного ключа с тем, что находится в БД
-    */
-    public function activate($authkey)
-    {
-        $user = new User;
-        if($user->find()->where(['user_authkey'=>$authkey])->exists())
-        {
-            $user = $user->find()->where(['user_authkey'=>$authkey])->one();
-            $user->user_activated = true;
-            $user->save();
-            return true;
-        }
-        else
-        return false;
-
-    }
 }
