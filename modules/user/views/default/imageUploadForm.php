@@ -21,7 +21,7 @@
         ->label(false)
     ?>
                     
-    <?= Html::submitButton('Изменить', ['class' => 'btn btn-success col-md-12', 'id' => 'uploadImageBtn']) ?>
+    <?= Html::submitButton('Загрузить', ['class' => 'btn btn-success col-md-12', 'id' => 'uploadImageBtn']) ?>
 
     <?php ActiveForm::end() ?>
 
