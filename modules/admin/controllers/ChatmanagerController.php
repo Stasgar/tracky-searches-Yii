@@ -42,6 +42,7 @@ class ChatmanagerController extends AdminBehavioursController
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Chat::find(),
+            'sort'=> ['defaultOrder' => ['datetime'=>SORT_DESC]]
         ]);
 
         return $this->render('index', [
