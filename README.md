@@ -1,5 +1,7 @@
 # tracky-searches-Yii <img width="26" height="26" src="https://tracky-searches.ru/images/logo_img.png">
 
+<b>ОДИН ИЗ МОИХ ПЕРВЫХ ПРОЕКТОВ, ПРЕДСТАВЛЯЕТ ИЗ СЕБЯ НАБОР ХУДШИХ ПРАКТИК ПРОЕКТИРОВАНИЯ ВЕБ-ПРИЛОЖЕНИЙ, ТАК ПИСАТЬ НЕ НУЖНО. ВОЗМОЖНО КОГДА-НИБУДЬ БУДЕТ СДЕЛАН РЕФАКТОРИНГ</b>
+
 <img src="https://s23.postimg.org/l3e6vcxob/tracky_preview.png">
 Репозиторий веб-сайта [tracky-searches.ru](https://tracky-searches.ru/)
 
